@@ -3,10 +3,7 @@
     "plugin:flowtype/recommended",
     "plugin:react/recommended",
     "standard",
-    "prettier",
-    "prettier/flowtype",
-    "prettier/react",
-    "prettier/standard"
+    "prettier"
   ],
   "env": {
     "node": true,
