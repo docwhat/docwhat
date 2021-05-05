@@ -1,6 +1,6 @@
 # syntax = docker/dockerfile:1-experimental
 
-ARG NODE_VERSION=12
+ARG NODE_VERSION=14
 
 FROM node:$NODE_VERSION     AS node
 FROM nginx:stable-alpine    AS nginx
@@ -18,6 +18,12 @@ RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then \
   && usermod --uid $USER_UID --gid $USER_GID $USERNAME \
   && chown -R $USER_UID:$USER_GID /home/$USERNAME; \
   fi
+
+RUN mkdir -p /home/$USERNAME/.vscode-server/extensions \
+        /home/$USERNAME/.vscode-server-insiders/extensions \
+    && chown -R $USERNAME \
+        /home/$USERNAME/.vscode-server \
+        /home/$USERNAME/.vscode-server-insiders
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \

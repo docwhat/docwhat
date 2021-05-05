@@ -3,9 +3,7 @@
   "name": "Dockerfile",
   "dockerFile": "../Dockerfile",
 
-  "settings": {
-    "terminal.integrated.shell.linux": "/bin/bash"
-  },
+  "settings": {},
 
   "extensions": [
     "dbaeumer.vscode-eslint",
@@ -19,7 +17,7 @@
     "eliostruyf.vscode-front-matter"
   ],
 
-  "forwardPort": [3000],
+  "appPort": [3000],
   "remoteUser": "node",
   "build": {
     "target": "development"
@@ -27,7 +25,11 @@
   "workspaceFolder": "/workspace",
   "workspaceMount": "src=${localWorkspaceFolder},dst=/workspace,type=bind,consistency=cached",
   "mounts": [
-    "src=docwhat-docwhat-node_modules,dst=/workspace/node_modules,type=volume"
+    "source=${localEnv:HOME}/.dotfiles,target=/home/node/.dotfiles,type=bind,consistency=cached",
+    "source=${localEnv:HOME}/.dotfiles-personal,target=/home/node/.dotfiles-personal,type=bind,consistency=cached",
+    "src=docwhat-docwhat-node_modules,dst=/workspace/node_modules,type=volume",
+    "source=docwhat-docwhat-vscode-server-extenstions,target=/home/node/.vscode-server/extensions,type=volume",
+    "source=docwhat-docwhat-vscode-server-insiders-extenstions-insiders,target=/home/node/.vscode-server-insiders/extensions,type=volume"
   ],
   "postCreateCommand": "sudo chown node node_modules"
 }
